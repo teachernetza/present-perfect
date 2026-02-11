@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Present Perfect Lab | Rators Club</title>
+    
+    <link rel="icon" href="https://drive.google.com/thumbnail?id=1bOFY9XiVAv-WRQnVHXSnL5FHVEoK3UAp&sz=w128" type="image/png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* ========================================
+           SISTEMA DE DISEÑO: PREMIUM EDUCATIONAL GLOW v13
+           ======================================== */
+        :root {
+            /* Paleta Modo Claro (Papel cálido) */
+            --bg-color: #fdfcf9; 
+            --surface-color: #ffffff;
+            --surface-hover: #f4f5f7;
+            --header-bg: rgba(255, 255, 255, 0.92);
+            
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            
+            /* Colores de Marca Elegantes */
+            --primary: #3730a3; /* Índigo profundo */
+            --primary-light: rgba(55, 48, 163, 0.05);
+            --secondary: #059669; /* Esmeralda oscuro */
+            --secondary-light: rgba(5, 150, 105, 0.05);
+            --accent: #d97706; /* Dorado elegante */
+            --accent-light: rgba(217, 119, 6, 0.05);
+            --error: #dc2626; /* Rojo para errores/alertas */
+            --error-light: rgba(220, 38, 38, 0.05);
+            
+            --border-color: #e5e7eb;
+            --border-focus: rgba(55, 48, 163, 0.2);
+            
+            /* Elegant Glow System */
+            --glow-static: 0 8px 25px rgba(55, 48, 163, 0.06);
+            --glow-hover: 0 15px 40px rgba(55, 48, 163, 0.15);
+            --glow-secondary: 0 15px 40px rgba(5, 150, 105, 0.15);
+            --glow-accent: 0 15px 40px rgba(217, 119, 6, 0.15);
+            
+            --radius-soft: 16px;
+            --radius-card: 28px;
+        }
+
+        .dark-mode {
+            /* Paleta Modo Oscuro (Biblioteca Nocturna) */
+            --bg-color: #0f1115; 
+            --surface-color: #1a1d24;
+            --surface-hover: #252932;
+            --header-bg: rgba(15, 17, 21, 0.92);
+            
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            
+            --primary: #818cf8; 
+            --primary-light: rgba(129, 140, 248, 0.1);
+            --secondary: #34d399; 
+            --secondary-light: rgba(52, 211, 153, 0.1);
+            --accent: #fbbf24;
+            --accent-light: rgba(251, 191, 36, 0.1);
+            --error: #ef4444;
+            --error-light: rgba(239, 68, 68, 0.1);
+            
+            --border-color: #2d3139;
+            --border-focus: rgba(129, 140, 248, 0.4);
+            
+            --glow-static: 0 8px 25px rgba(129, 140, 248, 0.08);
+            --glow-hover: 0 15px 40px rgba(129, 140, 248, 0.25);
+            --glow-secondary: 0 15px 40px rgba(52, 211, 153, 0.2);
+            --glow-accent: 0 15px 40px rgba(251, 191, 36, 0.2);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
+        html, body { width: 100%; height: 100%; overflow-x: hidden; scroll-behavior: smooth; }
+        
+        body { 
+            font-family: 'Nunito Sans', sans-serif; 
+            background-color: var(--bg-color); color: var(--text-main); 
+            transition: background-color 0.6s ease, color 0.6s ease; 
+            line-height: 1.8; font-size: 17px;
+        }
+
+        h1, h2, h3, .serif-text { font-family: 'Lora', serif; font-weight: 600; }
+
+        .learning-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+            background-size: 40px 40px; opacity: 0.4; transition: opacity 0.5s ease;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Header --- */
+        header {
+            padding: 1.2rem 3.5rem; display: flex; justify-content: space-between; align-items: center;
+            background: var(--header-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            position: sticky; top: 0; z-index: 2000; border-bottom: 1px solid var(--border-color);
+            transition: all 0.4s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+        
+        .header-brand { display: flex; align-items: center; gap: 18px; text-decoration: none; color: inherit; transition: 0.3s; }
+        .header-brand:hover { transform: translateY(-2px); }
+        
+        .logo-box { 
+            width: 55px; height: 55px; border-radius: 16px; 
+            display: flex; align-items: center; justify-content: center; 
+            background: var(--surface-color); overflow: hidden; border: 2px solid var(--border-focus);
+            box-shadow: var(--glow-static); transition: 0.4s ease;
+        }
+        .header-brand:hover .logo-box { box-shadow: var(--glow-hover); border-color: var(--primary); }
+        .logo-box img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .brand-text { font-family: 'Nunito Sans', sans-serif; font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; color: var(--primary); }
+
+        .menu-trigger { 
+            background: var(--surface-color); border: 1px solid var(--border-color); 
+            width: 50px; height: 50px; border-radius: 14px; cursor: pointer; 
+            color: var(--text-main); font-size: 1.2rem; display: flex; align-items: center; justify-content: center; 
+            transition: 0.3s ease; box-shadow: var(--glow-static);
+        }
+        .menu-trigger:hover { background: var(--primary-light); color: var(--primary); border-color: var(--primary); box-shadow: var(--glow-hover); }
+
+        /* --- Sidebar --- */
+        .sidebar { 
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100%; 
+            background: var(--surface-color); z-index: 3000; 
+            transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1); padding: 3rem 2.5rem; 
+            border-left: 1px solid var(--border-color); box-shadow: -15px 0 50px rgba(0,0,0,0.08);
+            display: flex; flex-direction: column; overflow-y: auto;
+        }
+        .sidebar.active { right: 0; }
+        
+        .sidebar-close {
+            background: none; border: none; font-size: 2rem; align-self: flex-end; 
+            color: var(--text-muted); cursor: pointer; transition: 0.3s; margin-bottom: 1.5rem;
+        }
+        .sidebar-close:hover { color: var(--text-main); transform: scale(1.1) rotate(90deg); }
+
+        .nav-title { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; padding-left: 5px; }
+
+        .side-btn { 
+            width: 100%; padding: 18px 22px; border: 1px solid transparent; border-radius: var(--radius-soft); 
+            background: transparent; color: var(--text-muted); font-weight: 600; text-align: left; 
+            cursor: pointer; display: flex; align-items: center; gap: 18px; text-decoration: none; 
+            font-size: 1.1rem; transition: 0.3s; font-family: 'Nunito Sans', sans-serif; margin-bottom: 8px;
+        }
+        .side-btn i { font-size: 1.3rem; width: 30px; text-align: center; transition: 0.3s; color: var(--text-muted); opacity: 0.8;}
+        .side-btn:hover { background: var(--surface-hover); color: var(--text-main); transform: translateX(-5px); border-color: var(--border-color); }
+        .side-btn:hover i { color: var(--primary); opacity: 1; }
+        .side-btn.active { background: var(--primary-light); color: var(--primary); font-weight: 700; border-color: var(--border-focus); box-shadow: inset 0 0 15px rgba(55, 48, 163, 0.03); }
+        .side-btn.active i { color: var(--primary); opacity: 1; }
+
+        .theme-control {
+            margin-top: 2rem; padding: 22px; border-radius: var(--radius-soft); display: flex; justify-content: space-between; align-items: center; background: var(--surface-hover); border: 1px solid var(--border-color);
+        }
+        .theme-control span { font-size: 0.95rem; font-weight: 700; color: var(--text-main); }
+        .switch { position: relative; width: 54px; height: 30px; cursor: pointer; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--text-muted); border-radius: 30px; transition: 0.4s; }
+        .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 4px; bottom: 4px; background: white; border-radius: 50%; transition: 0.4s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        input:checked + .slider { background: var(--primary); }
+        input:checked + .slider:before { transform: translateX(24px); }
+
+        /* --- Contenedor Principal --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 4rem 1.5rem; min-height: 80vh; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        .card { 
+            background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius-card); 
+            padding: 4.5rem 3.5rem; margin-bottom: 3rem; box-shadow: var(--glow-static); 
+            position: relative; overflow: hidden; transition: 0.4s;
+        }
+        .card:hover { border-color: var(--border-focus); box-shadow: var(--glow-hover); }
+
+        h1 { font-size: clamp(2.6rem, 7vw, 4rem); color: var(--text-main); line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -1px;}
+        h1 span { color: var(--primary); }
+        h2 { font-size: 2rem; margin: 3.5rem 0 1.5rem; color: var(--text-main); border-bottom: 2px solid var(--border-color); padding-bottom: 10px;}
+        p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        
+        .bold-purple { color: var(--primary); font-weight: 700; }
+        .bold-green { color: var(--secondary); font-weight: 700; }
+        .bold-amber { color: var(--accent); font-weight: 700; }
+        
+        .lang-en { font-family: 'JetBrains Mono', monospace; background: var(--surface-hover); border: 1px solid var(--border-color); padding: 4px 10px; border-radius: 8px; font-weight: 600; color: var(--primary); font-size: 1.05rem; }
+        
+        .explainer-box { background: var(--secondary-light); border-left: 6px solid var(--secondary); padding: 2.5rem; border-radius: 16px; margin: 3rem 0; }
+        .explainer-box p { color: var(--text-main); margin-bottom: 0; font-weight: 500; }
+        .explainer-box b { color: var(--secondary); font-size: 1.3rem; display: block; margin-bottom: 10px; font-family: 'Lora', serif; }
+
+        /* Logic Panels */
+        .logic-panel { 
+            background: var(--bg-color); border: 2px dashed var(--border-color); border-radius: 20px; 
+            padding: 2.5rem; margin: 2rem 0; text-align: center;
+        }
+        .formula { display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; font-weight: 700; font-family: 'JetBrains Mono', monospace;}
+        .node { padding: 12px 24px; border-radius: 12px; border: 2px solid var(--border-color); background: var(--surface-color); font-size: 1.1rem; box-shadow: var(--shadow-card); }
+        .node.subj { border-color: var(--text-main); color: var(--text-main); }
+        .node.aux { border-color: var(--primary); color: var(--primary); background: var(--primary-light); font-weight: 800;}
+        .node.verb { border-color: var(--secondary); color: var(--secondary); background: var(--secondary-light); }
+        .node.wh { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+        /* Rule Grid for Keywords */
+        .rule-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 2rem; }
+        .rule-box { padding: 30px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-color); transition: 0.4s; }
+        .rule-box:hover { transform: translateY(-5px); box-shadow: var(--glow-static); border-color: var(--primary); }
+        .rule-box h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 15px; font-family: 'Lora', serif; }
+        .rule-box .tag { display: inline-block; padding: 4px 12px; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; margin-bottom: 15px; background: var(--primary); color: white;}
+
+        /* Visual Timeline */
+        .timeline-box { position: relative; margin: 4rem 0; padding: 2rem 0; text-align: center; }
+        .timeline-line { position: absolute; top: 50%; left: 0; right: 0; height: 4px; background: var(--border-color); z-index: 1; transform: translateY(-5px);}
+        .timeline-points { display: flex; justify-content: space-between; position: relative; z-index: 2; }
+        .t-point { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 33%; }
+        .t-dot { width: 24px; height: 24px; border-radius: 50%; background: var(--surface-color); border: 4px solid var(--border-color); transition: 0.3s; }
+        .t-point.past .t-dot { border-color: var(--text-muted); }
+        .t-point.present .t-dot { border-color: var(--primary); box-shadow: 0 0 15px rgba(55, 48, 163, 0.4); background: var(--primary);}
+        .t-point.future .t-dot { border-color: var(--border-color); border-style: dashed; }
+        .t-label { font-weight: 800; font-family: 'Lora', serif; font-size: 1.2rem; color: var(--text-main); }
+        .t-desc { font-size: 0.95rem; color: var(--text-muted); }
+        .timeline-bridge { position: absolute; top: 30%; left: 16%; width: 34%; height: 30px; border-top: 4px dashed var(--secondary); border-radius: 50% 50% 0 0; z-index: 1; }
+
+        /* --- Interactive Workshop --- */
+        .workshop-area { background: var(--bg-color); padding: 3.5rem 2.5rem; border-radius: 24px; margin-top: 3rem; text-align: center; border: 1px solid var(--border-color); }
+        
+        .audio-trigger { 
+            background: var(--surface-hover); color: var(--primary); border: 2px solid var(--border-color); 
+            padding: 14px 28px; border-radius: 30px; cursor: pointer; font-weight: 700; 
+            display: inline-flex; align-items: center; gap: 12px; font-size: 1.05rem; transition: 0.3s;
+            font-family: 'Nunito Sans', sans-serif; margin-bottom: 2rem;
+        }
+        .audio-trigger:hover { background: var(--primary); color: white; border-color: var(--primary); box-shadow: var(--glow-static); }
+
+        .drop-zone { 
+            min-height: 100px; border: 3px dashed var(--primary); border-radius: 20px; 
+            background: var(--surface-color); margin: 2rem 0; padding: 25px; 
+            display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center;
+            transition: 0.3s ease;
+        }
+        
+        .word-pool { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; min-height: 80px; }
+        
+        .word-chip { 
+            background: var(--surface-color); border: 1px solid var(--border-color); padding: 14px 24px; 
+            border-radius: 14px; font-weight: 700; cursor: pointer; font-size: 1.2rem;
+            color: var(--text-main); box-shadow: 0 4px 10px rgba(0,0,0,0.03); transition: 0.2s; font-family: 'JetBrains Mono', monospace;
+        }
+        .word-chip:hover { transform: scale(1.05); border-color: var(--primary); color: var(--primary); }
+
+        .teacher-note {
+            display: none; background: var(--secondary-light); border: 1px solid rgba(5, 150, 105, 0.3); 
+            border-radius: 20px; padding: 2.5rem; margin-top: 3rem; text-align: left; 
+            animation: fadeUp 0.5s forwards;
+        }
+        .teacher-note b { color: var(--secondary); font-size: 1.3rem; display: block; margin-bottom: 15px; font-family: 'Lora', serif;}
+        .teacher-note p { color: var(--text-main); font-size: 1.15rem; margin-bottom: 0; }
+
+        .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 2.5rem; }
+        .btn-ui { padding: 18px; border-radius: 16px; border: 1px solid transparent; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1.1rem; font-family: 'Nunito Sans', sans-serif; display: flex; align-items: center; justify-content: center; gap: 10px;}
+        .btn-ui.clear { background: var(--surface-color); color: var(--error); border-color: var(--border-color); }
+        .btn-ui.clear:hover { border-color: var(--error); background: var(--error-light); }
+        .btn-ui.verify { background: var(--primary); color: white; box-shadow: var(--glow-static); }
+        .btn-ui.verify:hover { transform: translateY(-3px); box-shadow: var(--glow-hover); background: #312e81; }
+
+        /* --- Quiz System --- */
+        .quiz-option { 
+            width: 100%; padding: 22px; margin-bottom: 15px; border: 1px solid var(--border-color); 
+            border-radius: 16px; background: var(--surface-color); color: var(--text-main); 
+            font-weight: 600; text-align: left; cursor: pointer; transition: 0.2s; font-size: 1.15rem;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: var(--primary-light); transform: translateX(8px); }
+        
+        .timer-track { width: 100%; height: 8px; background: var(--border-color); border-radius: 10px; margin-bottom: 3rem; overflow: hidden; }
+        #timer-fill { width: 100%; height: 100%; background: var(--accent); transition: width 1s linear; }
+
+        .success-frame { text-align: center; display: none; }
+        .success-img-box { width: 100%; max-width: 420px; margin: 3rem auto; border-radius: 24px; border: 4px solid var(--border-color); overflow: hidden; box-shadow: var(--glow-static); }
+        .success-img-box img { width: 100%; display: block; }
+        
+        .review-box { background: var(--bg-color); border: 1px solid var(--border-color); border-left: 4px solid var(--error); border-radius: 16px; padding: 2.5rem; margin: 3rem 0; text-align: left; display: none; }
+        .review-box h3 { color: var(--error); margin-top: 0; font-family: 'Lora', serif; font-size: 1.5rem; margin-bottom: 1.5rem;}
+        .review-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px dashed var(--border-color); }
+        .review-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        /* --- Botones Genéricos --- */
+        .btn-action {
+            display: inline-flex; align-items: center; justify-content: center; gap: 15px; 
+            background: var(--primary); color: #ffffff; padding: 20px 40px; border-radius: 30px; 
+            text-decoration: none; font-weight: 700; font-size: 1.2rem; margin-top: 2rem; 
+            transition: 0.4s; border: none; cursor: pointer; width: 100%; 
+            box-shadow: var(--glow-static); font-family: 'Nunito Sans', sans-serif;
+        }
+        .btn-action:hover { transform: translateY(-5px); box-shadow: var(--glow-hover); }
+
+        /* --- WhatsApp Left --- */
+        .wa-float { 
+            position: fixed; bottom: 40px; left: 40px; background: #25d366; color: white; 
+            width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-size: 36px; z-index: 4000; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            text-decoration: none; transition: 0.4s; border: 3px solid var(--surface-color);
+        }
+        .wa-float:hover { transform: translateY(-8px) scale(1.1); box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5); }
+
+        /* --- Footer Premium --- */
+        footer { 
+            padding: 6rem 3rem 4rem; text-align: center; border-top: 1px solid var(--border-color); 
+            margin-top: 8rem; background: var(--surface-color); color: var(--text-muted); 
+        }
+        .footer-brand { font-family: 'Lora', serif; font-size: 2.2rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem; }
+        .footer-text { font-size: 1.1rem; font-weight: 500; margin-bottom: 5px; }
+        .footer-license { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color); font-size: 0.85rem; font-weight: 800; letter-spacing: 2px; color: var(--text-muted); opacity: 0.6; }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 1.5rem; }
+            .container { padding: 2rem 1rem; }
+            .card { padding: 3rem 1.5rem; }
+            .sidebar { width: 100%; }
+            .wa-float { width: 60px; height: 60px; font-size: 32px; bottom: 25px; left: 25px; }
+            .action-grid { grid-template-columns: 1fr; }
+            .formula { flex-direction: column; }
+            .formula i { transform: rotate(90deg); margin: 5px 0; }
+            .timeline-box { display: none; /* Hide visual timeline on very small screens for clarity, rely on text */ }
+        }
+    </style>
+</head>
+<body onclick="unlockAudio()">
+
+<div class="learning-bg"></div>
+
+<header>
+    <div class="header-brand" onclick="nav('home')">
+        <div class="logo-box">
+            <img src="https://drive.google.com/thumbnail?id=1bOFY9XiVAv-WRQnVHXSnL5FHVEoK3UAp&sz=w256" alt="Rators Logo">
+        </div>
+        <div class="brand-text">The Experience Lab</div>
+    </div>
+    <button class="menu-trigger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+</header>
+
+<div class="sidebar" id="sidebar">
+    <button class="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+    
+    <div class="nav-title">Ruta de Práctica</div>
+    <div style="display: flex; flex-direction: column; gap: 5px;">
+        <button class="side-btn active" onclick="nav('home', this)"><i class="fas fa-home"></i> Introducción</button>
+        <button class="side-btn" onclick="nav('structure', this)"><i class="fas fa-hammer"></i> Estructura y Reglas</button>
+        <button class="side-btn" onclick="nav('keywords', this)"><i class="fas fa-clock"></i> Time Hackers</button>
+        <button class="side-btn" onclick="nav('practice', this)"><i class="fas fa-puzzle-piece"></i> Guided Workshop</button>
+        <button class="side-btn" onclick="nav('evaluation', this)"><i class="fas fa-stopwatch"></i> Final Evaluation</button>
+    </div>
+
+    <div class="theme-control">
+        <span>Modo Biblioteca</span>
+        <label class="switch">
+            <input type="checkbox" id="themeInput" onchange="toggleTheme()">
+            <span class="slider"></span>
+        </label>
+    </div>
+</div>
+
+<div class="container">
+
+    <section id="sec-home" class="section active">
+        <div class="card">
+            <h1 class="serif-text">The <span style="color: var(--primary);">Experience</span> Timeline</h1>
+            <p>El <b>Present Perfect</b> es la herramienta que separa a los estudiantes básicos de los hablantes fluidos. Si intentas traducirlo del español como "Yo he comido", vas a cometer errores, porque en inglés este tiempo no habla del pasado, habla del <b>presente afectado por el pasado</b>.</p>
+            
+            <div class="timeline-box">
+                <div class="timeline-line"></div>
+                <div class="timeline-bridge"></div>
+                <div class="timeline-points">
+                    <div class="t-point past">
+                        <div class="t-dot"></div>
+                        <span class="t-label">Past Simple</span>
+                        <span class="t-desc">Acción muerta. Se quedó atrás.</span>
+                    </div>
+                    <div class="t-point present">
+                        <div class="t-dot"></div>
+                        <span class="t-label" style="color: var(--primary);">Present Perfect</span>
+                        <span class="t-desc">Un puente vivo hacia hoy.</span>
+                    </div>
+                    <div class="t-point future">
+                        <div class="t-dot"></div>
+                        <span class="t-label" style="opacity: 0.5;">Future</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="explainer-box">
+                <b>¿Cuándo usarlo?</b>
+                <p>1. Experiencias de vida (No importa <i>cuándo</i> pasó, importa que <i>tienes</i> la experiencia).<br>
+                2. Acciones que empezaron en el pasado y continúan hoy.<br>
+                3. Acciones recientes que tienen un resultado visible ahora mismo.</p>
+            </div>
+
+            
+
+            <button class="btn-action" onclick="nav('structure')">Ver Estructura Matemática <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </section>
+
+    <section id="sec-structure" class="section">
+        <div class="card">
+            <h1 class="serif-text">Grammar <span style="color: var(--secondary);">Structure</span></h1>
+            <p>Para construir el Present Perfect, necesitas un equipo de dos: El auxiliar <b>Have/Has</b> (que aquí significa "Haber", NO "Tener") y el temido <b>Past Participle</b> (la tercera columna de los verbos).</p>
+            
+            
+
+            <h2 class="serif-text" style="margin-top: 3rem;">Affirmative & Negative</h2>
+            <div class="logic-panel">
+                <div class="formula">
+                    <div class="node subj">I / You / We / They</div> <i class="fas fa-plus"></i> 
+                    <div class="node aux">HAVE / HAVEN'T</div> <i class="fas fa-plus"></i> 
+                    <div class="node verb">Past Participle</div>
+                </div>
+                <div class="formula" style="margin-top: 20px;">
+                    <div class="node subj">He / She / It</div> <i class="fas fa-plus"></i> 
+                    <div class="node aux" style="background:var(--accent-light); border-color:var(--accent); color:var(--accent);">HAS / HASN'T</div> <i class="fas fa-plus"></i> 
+                    <div class="node verb">Past Participle</div>
+                </div>
+            </div>
+
+            <h2 class="serif-text" style="margin-top: 4rem;">Questions & WH-Questions</h2>
+            <p>Como siempre en inglés, para preguntar cruzamos el Auxiliar con el Sujeto. Las palabras WH- (What, Where, How long) siempre lideran la fila.</p>
+            
+            <div class="logic-panel">
+                <div class="formula">
+                    <div class="node aux">HAVE / HAS</div> <i class="fas fa-plus"></i> 
+                    <div class="node subj">Subject</div> <i class="fas fa-plus"></i> 
+                    <div class="node verb">Past Participle</div> <i class="fas fa-question" style="color: var(--text-muted);"></i>
+                </div>
+                <div class="formula" style="margin-top: 25px; border-top: 1px dashed var(--border-color); padding-top: 25px;">
+                    <div class="node wh">WH- Word</div> <i class="fas fa-plus"></i> 
+                    <div class="node aux">HAVE / HAS</div> <i class="fas fa-plus"></i> 
+                    <div class="node subj">Subject</div> <i class="fas fa-plus"></i> 
+                    <div class="node verb">Past Participle</div> <i class="fas fa-question" style="color: var(--text-muted);"></i>
+                </div>
+            </div>
+
+            <button class="btn-action" style="background: var(--surface-color); color: var(--text-main); border: 2px solid var(--border-color); box-shadow: none;" onclick="nav('keywords')">Dominar los Time Hackers <i class="fas fa-clock"></i></button>
+        </div>
+    </section>
+
+    <section id="sec-keywords" class="section">
+        <div class="card">
+            <h1 class="serif-text">The Time <span style="color: var(--accent);">Hackers</span></h1>
+            <p>Estas palabras son como "hacks" que modifican el significado de la oración. Su posición dentro de la estructura es la regla más evaluada en el mundo.</p>
+
+            
+
+            <h2 class="serif-text" style="margin-top: 3rem;">1. Duration: FOR vs SINCE</h2>
+            <div class="rule-grid">
+                <div class="rule-box">
+                    <span class="tag" style="background: var(--primary);">FOR</span>
+                    <h3>Cantidad de Tiempo</h3>
+                    <p>Mide la duración total. <i>(Por/Durante)</i></p>
+                    <p class="lang-en" style="display:block; margin-top:15px; background:transparent; padding:0;">I have lived here <b>for</b> 10 years.</p>
+                </div>
+                <div class="rule-box">
+                    <span class="tag" style="background: var(--secondary);">SINCE</span>
+                    <h3>Punto de Inicio</h3>
+                    <p>Marca el momento exacto en el calendario. <i>(Desde)</i></p>
+                    <p class="lang-en" style="display:block; margin-top:15px; background:transparent; padding:0;">I have lived here <b>since</b> 2014.</p>
+                </div>
+            </div>
+
+            <h2 class="serif-text" style="margin-top: 4rem;">2. The Action Modifiers</h2>
+            <div class="rule-grid">
+                <div class="rule-box">
+                    <span class="tag" style="background: var(--accent);">JUST</span>
+                    <h3>Acción muy reciente</h3>
+                    <p>Significa "Acabo de". Va <b>entre</b> el Have/Has y el verbo principal.</p>
+                    <p class="lang-en" style="display:block; margin-top:15px; background:transparent; padding:0;">I have <b>just</b> finished.</p>
+                </div>
+                
+                <div class="rule-box">
+                    <span class="tag" style="background: var(--primary);">ALREADY</span>
+                    <h3>Antes de lo esperado</h3>
+                    <p>Significa "Ya". Se usa en afirmaciones y va <b>entre</b> el auxiliar y el verbo.</p>
+                    <p class="lang-en" style="display:block; margin-top:15px; background:transparent; padding:0;">I have <b>already</b> eaten.</p>
+                </div>
+
+                <div class="rule-box">
+                    <span class="tag" style="background: var(--error);">YET</span>
+                    <h3>Aún no / ¿Ya?</h3>
+                    <p>Solo se usa en <b>Negaciones</b> y <b>Preguntas</b>. Va siempre al <b>FINAL</b> de la oración.</p>
+                    <p class="lang-en" style="display:block; margin-top:15px; background:transparent; padding:0;">Has he arrived <b>yet</b>?</p>
+                </div>
+            </div>
+
+            <button class="btn-action" onclick="nav('practice')">Entrar al Taller de Reconstrucción <i class="fas fa-wrench"></i></button>
+        </div>
+    </section>
+
+    <section id="sec-practice" class="section">
+        <div class="card">
+            <h1 class="serif-text">Guided <span style="color: var(--primary);">Workshop</span></h1>
+            <p>Escucha la oración target y arrastra los bloques para construir la estructura correcta. <b>Presta atención a la posición de las palabras de tiempo (Just, Already, Yet).</b></p>
+            
+            <div class="workshop-area">
+                <button class="audio-trigger" onclick="playCurrentPrac()">
+                    <i class="fas fa-volume-up"></i> Listen Target Sentence
+                </button>
+
+                <div class="drop-zone" id="dropPort"></div>
+                <div class="word-pool" id="wordDock"></div>
+
+                <div class="action-grid" id="actionGrid">
+                    <button class="btn-ui clear" onclick="resetWorkshop()"><i class="fas fa-undo"></i> Reset</button>
+                    <button class="btn-ui verify" onclick="verifySentence()"><i class="fas fa-check"></i> Verify Logic</button>
+                </div>
+
+                <div class="teacher-note" id="teacherExp">
+                    <b><i class="fas fa-lightbulb"></i> Teacher's Note:</b>
+                    <p id="expText"></p>
+                    <button class="btn-ui verify" style="width: 100%; margin-top:20px;" onclick="nextPrac()">Siguiente Misión <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sec-evaluation" class="section">
+        <div class="card">
+            <div id="quiz-preamble">
+                <h1 class="serif-text">Final <span style="color: var(--secondary);">Evaluation</span></h1>
+                <p>Evalúa tu dominio sobre la línea de tiempo. Tienes <b>5 minutos</b> para completar 10 escenarios mezclando auxiliares, participios y *Time Hackers*.</p>
+                <div class="explainer-box" style="padding: 1.5rem; margin-top: 1.5rem; margin-bottom: 2.5rem; background: var(--surface-hover); border-color: var(--border-color);">
+                    <p style="color: var(--text-muted);">Requiere un mínimo de <b>80%</b> para aprobar. Los errores serán analizados al finalizar.</p>
+                </div>
+                <button class="btn-action" style="margin-top: 0;" onclick="startEvaluation()">Initiate Protocol 🚀</button>
+            </div>
+
+            <div id="quiz-active" style="display:none;">
+                <div class="timer-track"><div id="timer-fill"></div></div>
+                <div id="question-box"></div>
+            </div>
+
+            <div class="success-frame" id="quiz-success">
+                <h1 id="result-heading" class="serif-text" style="color: var(--secondary);">¡CERTIFICACIÓN OBTENIDA!</h1>
+                <p id="result-sub" style="font-size:1.2rem; color: var(--text-muted);">Has dominado el puente entre el pasado y el presente.</p>
+                
+                <div class="success-img-box" id="success-image-container">
+                    <img src="https://drive.google.com/file/d/1bOFY9XiVAv-WRQnVHXSnL5FHVEoK3UAp/view?usp=drive_link" alt="Success">
+                </div>
+                
+                <p id="final-result-text" style="font-size: 3.5rem; font-weight: 800; color: var(--primary); margin: 1.5rem 0; font-family: 'Lora', serif;"></p>
+                
+                <div class="review-box" id="reviewBox">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Análisis de Errores:</h3>
+                    <div id="reviewContent"></div>
+                </div>
+
+                <button class="btn-action" style="background: var(--surface-color); color: var(--text-main); border: 2px solid var(--border-color); box-shadow: none;" onclick="location.reload()">Volver al Inicio</button>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <div class="footer-brand">Rators Club</div>
+    <p class="footer-text">Teacher Netza Varo • Fluent Architecture</p>
+    <div style="margin-top: 3rem; opacity: 0.5; font-size: 0.85rem; font-weight: 800; letter-spacing: 2px;">PLATINUM EDITION 2026 | GNU GPL v3.0</div>
+</footer>
+
+<a href="https://wa.me/523231116425?text=Hola%20Teacher%20Netza,%20estoy%20en%20el%20Lab%20de%20Present%20Perfect%20y%20me%20gustar%C3%ADa%20mejorar%20mi%20gram%C3%A1tica." class="wa-float" target="_blank" title="Contactar al Teacher">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+    /* ========================================
+       ENGINE: PRESENT PERFECT LOGIC
+       ======================================== */
+    
+    // --- Audio Synthesis ---
+    let audioUnlocked = false;
+    function unlockAudio() { if(!audioUnlocked) { window.speechSynthesis.speak(new SpeechSynthesisUtterance("")); audioUnlocked = true; } }
+    function speakText(txt) {
+        window.speechSynthesis.cancel();
+        const msg = new SpeechSynthesisUtterance(txt);
+        msg.lang = 'en-US'; msg.rate = 0.85;
+        window.speechSynthesis.speak(msg);
+    }
+
+    // --- Navigation & Theme ---
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+    
+    function toggleTheme() {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('rators-premium-theme', isDark ? 'dark' : 'light');
+    }
+
+    function nav(id, btn) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        setTimeout(() => { document.getElementById('sec-' + id).classList.add('active'); }, 50);
+        
+        document.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
+        if(btn) btn.classList.add('active');
+        
+        if(document.getElementById('sidebar').classList.contains('active')) toggleSidebar();
+        window.scrollTo(0,0);
+        if(id === 'practice') initWorkshop();
+    }
+
+    // --- Guided Workshop Logic ---
+    const workshopData = [
+        {
+            full: "I have just finished my homework", 
+            words: ["I", "have", "just", "finished", "my homework"],
+            exp: "¡Excelente! <b>Just</b> significa que la acción acaba de ocurrir hace un momento, y siempre se coloca entre el auxiliar 'have' y el participio 'finished'."
+        },
+        {
+            full: "She hasn't seen that movie yet", 
+            words: ["She", "hasn't", "seen", "that movie", "yet"],
+            exp: "Perfecto. Es una oración negativa con 'She', por lo que usamos 'hasn't'. Y el modificador <b>Yet</b> (aún no) siempre viaja hasta el final de la oración."
+        },
+        {
+            full: "How long have you lived here", 
+            words: ["How long", "have", "you", "lived", "here"],
+            exp: "¡Bien hecho! Esta es la típica WH-Question para preguntar por duración. 'How long' va primero, seguido del cruce 'have you'."
+        },
+        {
+            full: "They have already eaten dinner",
+            words: ["They", "have", "already", "eaten", "dinner"],
+            exp: "Muy bien. <b>Already</b> indica que la acción ocurrió antes de lo esperado, y se posiciona justo en medio del 'have' y el verbo en participio 'eaten'."
+        },
+        {
+            full: "We have known him since 2010",
+            words: ["We", "have", "known", "him", "since", "2010"],
+            exp: "¡Correcto! Usamos <b>Since</b> porque '2010' marca un punto de inicio específico en el calendario, no una cantidad de tiempo."
+        }
+    ];
+    let curPracIdx = 0;
+
+    function initWorkshop() {
+        document.getElementById('teacherExp').style.display = 'none';
+        document.getElementById('actionGrid').style.display = 'grid';
+        
+        const data = workshopData[curPracIdx];
+        
+        const dock = document.getElementById('wordDock');
+        const port = document.getElementById('dropPort');
+        dock.innerHTML = ''; port.innerHTML = '';
+        port.style.borderColor = 'var(--primary)';
+
+        [...data.words].sort(() => Math.random() - 0.5).forEach(word => {
+            const chip = document.createElement('div');
+            chip.className = 'word-chip';
+            chip.innerText = word;
+            chip.onclick = () => { 
+                port.appendChild(chip); 
+                speakText(word); 
+            };
+            dock.appendChild(chip);
+        });
+    }
+
+    function playCurrentPrac() { speakText(workshopData[curPracIdx].full); }
+    function resetWorkshop() { initWorkshop(); }
+
+    function verifySentence() {
+        const result = Array.from(document.getElementById('dropPort').children).map(c => c.innerText).join(' ');
+        const dropZone = document.getElementById('dropPort');
+
+        if(result === workshopData[curPracIdx].full) {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            document.getElementById('actionGrid').style.display = 'none'; 
+            dropZone.style.borderColor = 'var(--secondary)';
+            
+            const expBox = document.getElementById('teacherExp');
+            document.getElementById('expText').innerHTML = workshopData[curPracIdx].exp;
+            expBox.style.display = 'block';
+            speakText("Structure verified. Excellent.");
+            
+        } else {
+            dropZone.style.borderColor = 'var(--error)';
+            speakText("Incorrect structure. Check the time modifiers.");
+            setTimeout(() => dropZone.style.borderColor = 'var(--primary)', 1500);
+        }
+    }
+
+    function nextPrac() {
+        curPracIdx = (curPracIdx + 1) % workshopData.length;
+        initWorkshop();
+    }
+
+    // --- Final Evaluation Logic ---
+    const quizItems = [
+        { q: "I ____ to Paris three times in my life.", a: "have been", o: ["went", "have been", "have go"] },
+        { q: "My sister ____ a new car.", a: "has bought", o: ["have bought", "has bought", "buyed"] },
+        { q: "They have lived in this city ____ 10 years.", a: "for", o: ["since", "during", "for"] },
+        { q: "We have been friends ____ we were children.", a: "since", o: ["for", "since", "until"] },
+        { q: "I am not hungry. I have ____ eaten a big pizza.", a: "already", o: ["yet", "just", "already"] },
+        { q: "Don't touch the paint! I have ____ painted the wall.", a: "just", o: ["already", "yet", "just"] },
+        { q: "Have you finished your homework ____?", a: "yet", o: ["already", "just", "yet"] },
+        { q: "____ you ever eaten sushi?", a: "Have", o: ["Has", "Have", "Did"] },
+        { q: "She ____ called me back yet.", a: "hasn't", o: ["haven't", "didn't", "hasn't"] },
+        { q: "____ have you studied English? - For two years.", a: "How long", o: ["When", "How long", "How much"] }
+    ];
+
+    let quizIdx = 0;
+    let quizScore = 0;
+    let quizClock;
+    let mistakesArray = [];
+
+    function startEvaluation() {
+        document.getElementById('quiz-preamble').style.display = 'none';
+        document.getElementById('quiz-active').style.display = 'block';
+        mistakesArray = [];
+        quizScore = 0;
+        quizIdx = 0;
+        
+        let timeLeft = 300; 
+        quizClock = setInterval(() => {
+            timeLeft -= 0.2;
+            document.getElementById('timer-fill').style.width = (timeLeft / 300) * 100 + '%';
+            if(timeLeft <= 0) finishEvaluation();
+        }, 200);
+        showQuestion();
+    }
+
+    function showQuestion() {
+        if(quizIdx >= quizItems.length) return finishEvaluation();
+        
+        const data = quizItems[quizIdx];
+        const box = document.getElementById('question-box');
+        box.innerHTML = `<h3 style="font-size: 1.35rem; margin-bottom: 2rem; color:var(--text-main); font-family:'Nunito Sans', sans-serif; font-weight: 600; line-height: 1.6;">${data.q}</h3>`;
+        
+        data.o.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'quiz-option';
+            btn.innerText = opt;
+            btn.onclick = () => {
+                if(opt === data.a) {
+                    quizScore++;
+                } else {
+                    mistakesArray.push({
+                        question: data.q.replace('____', `<b style="color:var(--secondary);">${data.a}</b>`),
+                        userAnswer: opt
+                    });
+                }
+                quizIdx++;
+                showQuestion();
+            };
+            box.appendChild(btn);
+        });
+    }
+
+    function finishEvaluation() {
+        clearInterval(quizClock);
+        document.getElementById('quiz-active').style.display = 'none';
+        document.getElementById('quiz-success').style.display = 'block';
+        
+        const resultText = document.getElementById('final-result-text');
+        const heading = document.getElementById('result-heading');
+        const sub = document.getElementById('result-sub');
+        const imgBox = document.getElementById('success-image-container');
+        
+        resultText.innerText = `${quizScore} / 10`;
+        
+        if(quizScore >= 8) {
+            confetti({ particleCount: 300, spread: 120, origin: { y: 0.6 } });
+            heading.innerText = "¡CERTIFICACIÓN OBTENIDA!";
+            heading.style.color = "var(--secondary)";
+            sub.innerText = "Eres capaz de estructurar experiencias y modificadores de tiempo fluidamente.";
+            imgBox.style.display = "block";
+        } else {
+            heading.innerText = "EVALUACIÓN FALLIDA";
+            heading.style.color = "var(--error)";
+            sub.innerText = "Debes repasar las reglas de los Time Hackers (For, Since, Just, Already, Yet).";
+            imgBox.style.display = "none";
+            resultText.style.color = "var(--error)";
+        }
+
+        const reviewBox = document.getElementById('reviewBox');
+        const reviewContent = document.getElementById('reviewContent');
+        if (mistakesArray.length > 0) {
+            reviewBox.style.display = 'block';
+            let html = '';
+            mistakesArray.forEach((err, i) => {
+                html += `<div class="review-item">
+                            <p style="margin:0; font-size:1.1rem; color:var(--text-main);"><b>${i+1}.</b> ${err.question}</p>
+                            <p style="margin:8px 0 0; color:var(--text-muted); font-size:0.95rem;">Seleccionaste: <span style="color:var(--error); text-decoration:line-through; font-weight:700;">${err.userAnswer}</span></p>
+                         </div>`;
+            });
+            reviewContent.innerHTML = html;
+        } else {
+            reviewBox.style.display = 'none';
+        }
+    }
+
+    window.onload = () => {
+        const pref = localStorage.getItem('rators-premium-theme');
+        if(pref === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.getElementById('themeInput').checked = true;
+        }
+    };
+</script>
+
+</body>
+</html>
